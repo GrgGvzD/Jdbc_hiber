@@ -6,40 +6,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
-    private String userName;
-    private String password;
-    private String connectionUrl;
 
-    Connection connection;
-    Statement statement;
+    private static String userName  = "root";
+    private static String password = "MainUser";
+    private static String connectionUrl = "jdbc:mysql://localhost:3306/my_db";
 
-    public Util() throws ClassNotFoundException, SQLException {
-        userName = "root";
-        password = "MainUser";
-        connectionUrl = "jdbc:mysql://localhost:3306/my_db";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(connectionUrl, userName, password);
-        statement = connection.createStatement();
+
+    public static Connection getConnection() throws SQLException {
+
+        return DriverManager.getConnection(connectionUrl, userName, password);
     }
 
-    public Util(String userName, String password, String connectionUrl) throws ClassNotFoundException, SQLException {
-        this.userName = userName;
-        this.password = password;
-        this.connectionUrl = connectionUrl;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(connectionUrl, userName, password);
-        statement = connection.createStatement();
-        System.out.println(" Connected!!!");
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public Statement getStatement() {
-        return statement;
-    }
 
     public String getUserName() {
         return userName;
