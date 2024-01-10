@@ -14,6 +14,7 @@ public class Main {
         byte testAge = 5;
 
         UserServiceImpl userService = new UserServiceImpl();
+//        userService.dropUsersTable();
         userService.createUsersTable();
         for (int i = 0; i < 4; i++) {
             userService.saveUser(testName + i, testLastName + i, (byte)(testAge + i));
@@ -23,6 +24,7 @@ public class Main {
         for (User user : users) {
             System.out.println(user);
         }
+        userService.removeUserById(1);
         userService.cleanUsersTable();
         userService.dropUsersTable();
 
