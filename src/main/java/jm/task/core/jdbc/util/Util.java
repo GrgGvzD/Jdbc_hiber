@@ -22,9 +22,19 @@ public class Util {
     }
     /////////hib
     public static SessionFactory getSessionFactory() {
-        return new Configuration().addAnnotatedClass(User.class).buildSessionFactory();
-    }
+        Configuration configuration = new Configuration()
+                .setProperty("hibernate.driver_class","com.mysql.cj.jdbc.Driver")
+                .setProperty("hibernate.connection.url","jdbc:mysql://localhost:3306/my_db")
+                .setProperty("hibernate.connection.username","root")
+                .setProperty("hibernate.connection.password","MainUser")
+                .setProperty("hibernate.dialect","org.hibernate.dialect.MySQL8Dialect")
+                .setProperty("hibernate.show_sql","true")
+                .setProperty("hibernate.current_session_context_class","thread");
 
+        configuration.addAnnotatedClass(User.class);
+        return configuration.addAnnotatedClass(User.class).buildSessionFactory();
+
+    }
 
     //////////
 
